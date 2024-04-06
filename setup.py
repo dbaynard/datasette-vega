@@ -32,14 +32,12 @@ class BuildStatic(Command):
         pass
 
     def run(self):
-        check_output(["npm", "install"], cwd=ROOT)
-        check_output(["npm", "run", "build"], cwd=ROOT)
         check_output(["mkdir", "-p", "datasette_vega/static"], cwd=ROOT)
         check_output(
-            "mv build/static/js/* datasette_vega/static/", shell=True, cwd=ROOT
+            "cp @npm_build@/static/js/* datasette_vega/static/", shell=True, cwd=ROOT
         )
         check_output(
-            "mv build/static/css/* datasette_vega/static/", shell=True, cwd=ROOT
+            "cp @npm_build@/static/css/* datasette_vega/static/", shell=True, cwd=ROOT
         )
 
 
